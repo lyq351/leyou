@@ -11,6 +11,7 @@
         <module>leyou-registry</module>
         <module>leyou-gateway</module>
         <module>leyou-item</module>
+        <module>leyou-common</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -86,6 +87,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.0.7.RELEASE</version>
             </plugin>
         </plugins>
     </build>
