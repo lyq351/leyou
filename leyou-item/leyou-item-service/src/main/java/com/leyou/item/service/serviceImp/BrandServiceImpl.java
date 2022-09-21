@@ -21,23 +21,33 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public PageResult queryByPage(String key, Integer page, Integer rows, String sortBy, Boolean desc) {
-        Example example = new Example(Brand.class);
-        Example.Criteria criteria = example.createCriteria();
+
         //添加分页条件
         Page page1 = PageHelper.startPage(page,rows);
-        if(StringUtils.isNotEmpty(key)){
-            criteria.andLike("name","%"+key+"%")
-            .orEqualTo("letter",key);
-        }
-        if(StringUtils.isNotBlank(sortBy)){
-            example.setOrderByClause(sortBy+" "+(desc?"desc":"asc"));
-        }
-        List<Brand> brands = this.brandMapper.selectByExample(example);
+        String descOrAsc = desc ? "desc" : "asc";
+        List<Brand> brandList = this.brandMapper.queryByKey(key,sortBy,descOrAsc);
         // 包装成pageInfo
-        PageInfo<Brand> pageInfo = new PageInfo<>(brands);
+        //PageInfo<Brand> pageInfo = new PageInfo<>(brandList);
+        //new PageResult<>(pageInfo.getTotal(), pageInfo.getList());
+        return  new PageResult(page1.getTotal(),page1.getPageSize(),brandList);
 
-        //return  new PageResult(pageInfo.getTotal(),pageInfo.getPageSize(),brands);
-        return  new PageResult(page1.getTotal(),page1.getPageSize(),brands);
+//        Example example = new Example(Brand.class);
+//        Example.Criteria criteria = example.createCriteria();
+//        //添加分页条件
+//        Page page1 = PageHelper.startPage(page,rows);
+//        if(StringUtils.isNotEmpty(key)){
+//            criteria.andLike("name","%"+key+"%")
+//            .orEqualTo("letter",key);
+//        }
+//        if(StringUtils.isNotBlank(sortBy)){
+//            example.setOrderByClause(sortBy+" "+(desc?"desc":"asc"));
+//        }
+//        List<Brand> brands = this.brandMapper.selectByExample(example);
+//        // 包装成pageInfo
+//        PageInfo<Brand> pageInfo = new PageInfo<>(brands);
+//
+//        //return  new PageResult(pageInfo.getTotal(),pageInfo.getPageSize(),brands);
+//        return  new PageResult(page1.getTotal(),page1.getPageSize(),brands);
     }
 
     @Override

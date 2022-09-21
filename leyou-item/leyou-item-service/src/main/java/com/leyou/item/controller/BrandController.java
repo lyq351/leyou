@@ -21,7 +21,7 @@ import java.util.List;
 public class BrandController {
     @Autowired
     private BrandService brandService;
-    @GetMapping("page")
+    @GetMapping("/page")
     public ResponseEntity<PageResult> queryByPage(
             @RequestParam(value = "key", required = false)String key,
             @RequestParam(value = "page", defaultValue = "1")Integer page,
@@ -38,8 +38,8 @@ public class BrandController {
     }
     @PostMapping
     public ResponseEntity<PageResult> addBrand(Brand brand, @RequestParam("cids") List<Long> cids){
-        this.brandService.saveBrand(brand,cids);
 
+        this.brandService.saveBrand(brand,cids);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
