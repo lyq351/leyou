@@ -21,6 +21,7 @@ public class UploadService implements IUploadService {
 
     @Override
     public String upload(MultipartFile file) {
+        LOGGER.info("入参：{}",file.getName());
         //1. 校验文件大小
         //2. 校验文件的媒体类型
         //3. 校验文件的内容

@@ -8,17 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RequestMapping("/brand")
 @Controller
 public class BrandController {
+
     @Autowired
     private BrandService brandService;
     @GetMapping("/page")
@@ -37,9 +34,21 @@ public class BrandController {
         return ResponseEntity.ok(pageResult);
     }
     @PostMapping
-    public ResponseEntity<PageResult> addBrand(Brand brand, @RequestParam("cids") List<Long> cids){
+    public ResponseEntity addBrand(Brand brand, @RequestParam("cids") List<Long> cids){
 
         this.brandService.saveBrand(brand,cids);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping
+    public ResponseEntity updateBrand(Brand brand){
+
+        return null;
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity deleteBrand(@PathVariable String id){
+        this.brandService.deleteBrand(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

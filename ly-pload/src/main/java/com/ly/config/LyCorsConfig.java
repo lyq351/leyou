@@ -1,4 +1,4 @@
-package com.leyou.config;
+package com.ly.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
-public class LeyouCorsConfig {
+public class LyCorsConfig {
     @Bean
     public CorsFilter corsFilter() {
         //1.添加CORS配置信息
@@ -18,12 +18,7 @@ public class LeyouCorsConfig {
         config.setAllowCredentials(true);
         //3) 允许的请求方式
         config.addAllowedMethod("OPTIONS");
-        config.addAllowedMethod("HEAD");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("PUT");
         config.addAllowedMethod("POST");
-        config.addAllowedMethod("DELETE");
-        config.addAllowedMethod("PATCH");
         // 4）允许的头信息
         config.addAllowedHeader("*");
 

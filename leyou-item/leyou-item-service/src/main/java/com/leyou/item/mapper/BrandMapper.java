@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BrandMapper extends Mapper<Brand> {
     @Insert("insert into tb_category_brand (category_id,brand_id) values(#{cid},#{brandId})")
-    void insertBrandAndCategory(@Param("cid") Long cid, @Param("brandId") Long id);
+    int insertBrandAndCategory(@Param("cid") Long cid, @Param("brandId") Long id);
 
     List<Brand> queryByKey(@Param("key") String key,@Param("sortBy") String sortBy,
                            @Param("descOrAsc") String descOrAsc);
