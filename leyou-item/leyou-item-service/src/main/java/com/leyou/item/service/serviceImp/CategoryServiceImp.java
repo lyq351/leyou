@@ -21,4 +21,9 @@ public class CategoryServiceImp implements CategoryService {
         category.setParentId(pid);
         return categoryMapper.select(category);
     }
+
+    @Override
+    public List<Category> queryCategoryByBrandId(int id) {
+        return categoryMapper.queryByBrandId(id);
+    }
 }

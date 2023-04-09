@@ -41,9 +41,9 @@ public class BrandController {
     }
 
     @PutMapping
-    public ResponseEntity updateBrand(Brand brand){
-
-        return null;
+    public ResponseEntity updateBrand(Brand brand, @RequestParam("cids")List<Long> cids){
+        this.brandService.updateBrand(brand, cids);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/{id}")

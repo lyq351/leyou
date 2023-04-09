@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 会以namespace 和 id 在mapper 中查询具体的方法
+         resultType 表示返回对象的数据类型
+         parameterType 表示传入的数据对象
+         id  唯一标识，要与命名空间（抽象方法）中定义的方法名称一致
+ -->
+<mapper namespace="com.leyou.item.mapper.CategoryMapper">
+    <resultMap id="baseMap" type="com.leyou.item.pojo.Category">
+        <id property="id" column="id" />
+        <result property="name" column="name"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="isParent" column="is_parent"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+    <select id="queryByBrandId" resultMap="baseMap">
+        select * from tb_category tbc left join tb_category_brand tbcb on tbc.id = tbcb.category_id
+        where tbcb.brand_id = #{id}
+    </select>
+
+
+</mapper>

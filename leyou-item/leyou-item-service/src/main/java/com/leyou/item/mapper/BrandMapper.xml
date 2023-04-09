@@ -14,6 +14,9 @@
         <result property="letter" column="letter"/>
         <result property="image" column="image"/>
     </resultMap>
+    <delete id="deleteBrandAndCategory">
+        delete from tb_category_brand where brand_id = #{brandId};
+    </delete>
 
     <select id="queryByKey" resultMap="baseMap">
         select * from tb_brand
@@ -22,7 +25,13 @@
             or letter = #{key}
         </if>
         <if test="sortBy != null and sortBy != ''">
-            order by #{sortBy} #{descOrAsc}
+            order by ${sortBy} ${descOrAsc}
         </if>
     </select>
+
+    <update id="updateBrand">
+        update tb_brand set name = #{name}, image = #{image}, letter = #{letter}
+        where id = #{id}
+    </update>
+
 </mapper>
